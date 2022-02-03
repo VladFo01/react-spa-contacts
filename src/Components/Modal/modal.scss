@@ -1,0 +1,56 @@
+.modal {
+    &-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        padding: 30px;
+
+        & span {
+            color: #000;
+            margin-bottom: 60px;
+        }
+    }
+
+    &-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        height: 30px;
+        width: 80px;
+        border: none;
+        padding: 5px 0;
+        cursor: pointer;
+
+        &.green {
+            background-color: rgb(5, 165, 0);
+        }
+
+        &.red {
+            background-color: rgb(255, 0, 0);
+        }
+
+        &__group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+    }
+}

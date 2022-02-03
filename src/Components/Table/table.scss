@@ -1,0 +1,56 @@
+table {
+    margin-top: 20px;
+    width: 100%;
+    border: 3px solid #ffd300;
+}
+
+th {
+    font-weight: normal;
+    font-size: 13px;
+    border: 1px solid #0040ff;
+    padding: 20px;
+    background: #ffd300;
+    color: #0040ff;
+    letter-spacing: .3em;
+}
+
+td {
+    color: rgb(13, 13, 77);
+    padding: 10px 20px;
+    text-align: center;
+
+    &:not(:last-child) {
+        border-right: 3px dashed #ffd300;
+    }
+}
+
+tr:hover td {
+    background: #0040ff05;
+}
+
+tbody > tr {
+    border-bottom: 3px solid #ffd300;
+}
+
+.table-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    min-width: 60px;
+    height: 30px;
+    padding: 5px 0;
+
+    &.blue {
+        background-color: rgb(6, 135, 255);
+    }
+
+    &.red {
+        background-color: rgb(255, 0, 0);
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
