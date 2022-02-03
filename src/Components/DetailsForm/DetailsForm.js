@@ -1,5 +1,4 @@
 import Form from "../../Components/Form/Form";
-import { validateEmail, validateText, validatePhone } from "../../Scripts/validation/validatePhone";
 
 const DetailsForm = ({ contactValues, setContactValues }) => {
 
@@ -13,23 +12,8 @@ const DetailsForm = ({ contactValues, setContactValues }) => {
         });
 
         // check whether there is an empty field
-        if (object.value === '') {
-            throw new Error(`Your ${object.key} is empty!`);
-        }
-
-        // validate name and surname
-        if (object.key.toLowerCase() !== 'phone' && object.key.toLowerCase() !== 'email') {
-            validateText(object.value, object.key);
-        }
-
-        // validate phone number
-        if (object.key.toLowerCase() === 'phone') {
-            validatePhone(object.value);
-        }
-
-        // validate email
-        if (object.key.toLowerCase() === 'email') {
-            validateEmail(object.value);
+        if (object.value === '' || object.key === '') {
+            throw new Error(`There is an empty field!`);
         }
     }
 
@@ -37,7 +21,7 @@ const DetailsForm = ({ contactValues, setContactValues }) => {
         setContactValues(prevArr => {
             prevArr.push(object);
             return prevArr;
-        })
+        });
     }
 
     return (

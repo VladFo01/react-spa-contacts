@@ -1,7 +1,9 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import EditModal from '../EditModal/EditModal';
 import './info.scss';
 
-const Info = ({ contactValues, setContactValues }) => {
+const Info = ({ contactValues, setContactValues, defContactValues }) => {
     const location = useLocation();
 
     function deleteValue(key) {
@@ -10,7 +12,21 @@ const Info = ({ contactValues, setContactValues }) => {
         });
     }
 
-    console.log(contactValues);
+    function cancelChange(key, defValues = defContactValues) {
+        const value = defValues.find(elem => elem.key === key)['value'];
+
+        setContactValues(prevArr => {
+            return prevArr.map(elem => {
+                if (elem.key === key) {
+                    return ({
+                        key,
+                        value
+                    });
+                }
+                return elem;
+            });
+        });
+    }
 
     return (
         <>
@@ -22,10 +38,16 @@ const Info = ({ contactValues, setContactValues }) => {
                             <td className='info-td'>{elem.key}</td>
                             <td className='info-td'>{elem.value}</td>
                             <td className='info-td'>
-                                <Link className='table-link blue' to={`${location.pathname}/${elem.key}`}>
+                                <Link className='table-link blue' to={`${location.pathname}/${elem.key}/edit`}>
                                     Edit
                                 </Link>
-                                {elem.key !== 'name' && elem.key !== 'surname' && elem.key !== 'phone' ? 
+                                {elem?.edited ?
+                                    <Link className='table-link orange' to={`${location.pathname}/${elem.key}/cancel-change`}>
+                                        Cancel change
+                                    </Link>
+                                : null}
+                                {elem.key !== 'name' && elem.key !== 'surname' &&
+                                elem.key !== 'phone' && elem.key !== 'email' && elem.key !== 'birthday' ? 
                                     <Link className='table-link red' to={`${location.pathname}/${elem.key}`}>
                                         Delete
                                     </Link>
@@ -37,7 +59,20 @@ const Info = ({ contactValues, setContactValues }) => {
                 </tbody>
             </table>
 
-            <Outlet context={{ onClickAction: deleteValue, paramName: 'key' }} />
+            <Routes>
+                <Route
+                    path={':id'}
+                    element={<ConfirmModal onClickAction={deleteValue} paramName={'key'} />}
+                />
+                <Route 
+                    path={':key/edit'} 
+                    element={<EditModal contactValues={contactValues} setContactValues={setContactValues} />} 
+                />
+                <Route
+                    path={':key/cancel-change'} 
+                    element={<ConfirmModal onClickAction={cancelChange} paramName={'key'} />} 
+                />
+            </Routes>
         </>
     );
 }

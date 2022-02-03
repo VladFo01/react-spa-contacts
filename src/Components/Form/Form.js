@@ -2,7 +2,7 @@ import { useState } from "react";
 import './form.scss';
 import Field from "../Field/Field";
 
-const Form = ({fields = [], setParentState, validate, legend, addBtnValue}) => {
+const Form = ({ fields = [], setParentState, validate, legend, addBtnValue }) => {
     const defObject = fields.reduce((acc, field) => {
         acc[field.id] = '';
         return acc;
@@ -13,7 +13,7 @@ const Form = ({fields = [], setParentState, validate, legend, addBtnValue}) => {
 
     function handleChange(event) {
         const key = event.target.id;
-        const value = event.target.value;
+        let value = event.target.value;
 
         setObject(prevObject => ({
             ...prevObject,

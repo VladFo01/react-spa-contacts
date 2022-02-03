@@ -1,5 +1,6 @@
-import { Outlet } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import './table.scss';
 
 const Table = ({ contacts, setContacts }) => {
@@ -40,7 +41,12 @@ const Table = ({ contacts, setContacts }) => {
                 </tbody>
             </table>
 
-            <Outlet context={{ onClickAction: deleteContact, paramName: 'id' }} />
+            <Routes>
+                <Route 
+                    path={':id'} 
+                    element={<ConfirmModal onClickAction={deleteContact} paramName={'id'} />} 
+                />
+            </Routes>
         </>
     )
 }

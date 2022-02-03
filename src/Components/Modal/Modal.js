@@ -1,24 +1,22 @@
-import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './modal.scss';
 
-const Modal = () => {
-    const { onClickAction, paramName } = useOutletContext();
+const Modal = ({ children, onClickAction, confirmText }) => {
     const navigate = useNavigate();
-    const params = useParams();
-
+    
     return (
         <div className="modal-wrapper">
             <div className="modal-body">
-                <span>Are you sure?</span>
+
+                { children }
+
                 <div className="modal-button__group">
                     <button className="modal-button green" 
                         onClick={() => {
-                            console.log(onClickAction);
-                            onClickAction(params[paramName]);
-                            navigate(-1)
+                            onClickAction();
                         }}
                     >
-                        Yes
+                        { confirmText }
                     </button>
                     <button className="modal-button red" onClick={() => navigate(-1)}>Cancel</button>
                 </div>
