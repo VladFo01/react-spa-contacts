@@ -3,7 +3,7 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import './EditModal.scss';
 
-const EditModal = ({ contactValues, setContactValues }) => {
+const EditModal = ({ contactValues, setContactValues, setSave }) => {
     const navigate = useNavigate();
     const { key } = useParams();
     const defValue = contactValues.find(elem => elem.key === key).value;
@@ -48,6 +48,7 @@ const EditModal = ({ contactValues, setContactValues }) => {
                 return elem;
             });
         });
+        setSave(false);
         navigate(-1);
     }
 

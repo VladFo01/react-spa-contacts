@@ -26,6 +26,7 @@ const Details = ({ contacts, setContacts }) => {
     const defContactValues = getDefContactValues(contacts);
 
     const [contactValues, setContactValues] = useState(defContactValues);
+    const [successSave, setSuccessSave] = useState(false);
 
     // save changes
     function handleSaveChanges(state, id) {
@@ -51,20 +52,30 @@ const Details = ({ contacts, setContacts }) => {
                 return elem;
             });
         });
+        setSuccessSave(true);
     }
 
     return (
         <>
             <Header />
-            <DetailsForm contactValues={contactValues} setContactValues={setContactValues} />
-            <Info contactValues={contactValues} setContactValues={setContactValues} defContactValues={defContactValues} />
+            <DetailsForm 
+                contactValues={contactValues} 
+                setContactValues={setContactValues} 
+                setSave={setSuccessSave} 
+            />
+            <Info 
+                contactValues={contactValues} 
+                setContactValues={setContactValues} 
+                defContactValues={defContactValues} 
+                setSave={setSuccessSave} 
+            />
 
             <div className="details-button__group">
                 <button 
                     className="details-button save" 
                     onClick={() => handleSaveChanges(contactValues, id)}
                 >
-                    Save changes
+                    {successSave ? `Save changes ${String.fromCharCode(10004)}` : 'Save changes'}
                 </button>
                 <button 
                     className="details-button cancel" 

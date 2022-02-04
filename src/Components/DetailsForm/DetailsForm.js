@@ -1,6 +1,6 @@
 import Form from "../../Components/Form/Form";
 
-const DetailsForm = ({ contactValues, setContactValues }) => {
+const DetailsForm = ({ contactValues, setContactValues, setSave }) => {
 
     function validateInputs(object, state = contactValues) {
 
@@ -22,6 +22,7 @@ const DetailsForm = ({ contactValues, setContactValues }) => {
             ...prevArr,
             object
         ]));
+        setSave(false);
     }
 
     return (

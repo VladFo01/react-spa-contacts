@@ -3,7 +3,7 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import EditModal from '../EditModal/EditModal';
 import './info.scss';
 
-const Info = ({ contactValues, setContactValues, defContactValues }) => {
+const Info = ({ contactValues, setContactValues, defContactValues, setSave }) => {
     const location = useLocation();
 
     function deleteValue(key) {
@@ -62,11 +62,11 @@ const Info = ({ contactValues, setContactValues, defContactValues }) => {
             <Routes>
                 <Route
                     path={':key/delete'}
-                    element={<ConfirmModal onClickAction={deleteValue} paramName={'key'} />}
+                    element={<ConfirmModal onClickAction={deleteValue} paramName={'key'} setSave={setSave} />}
                 />
                 <Route 
                     path={':key/edit'} 
-                    element={<EditModal contactValues={contactValues} setContactValues={setContactValues} />} 
+                    element={<EditModal contactValues={contactValues} setContactValues={setContactValues} setSave={setSave} />} 
                 />
                 <Route
                     path={':key/cancel-change'} 
