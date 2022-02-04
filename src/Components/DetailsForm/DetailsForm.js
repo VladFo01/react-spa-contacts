@@ -18,10 +18,10 @@ const DetailsForm = ({ contactValues, setContactValues }) => {
     }
 
     function setParentState(object) {
-        setContactValues(prevArr => {
-            prevArr.push(object);
-            return prevArr;
-        });
+        setContactValues(prevArr => ([
+            ...prevArr,
+            object
+        ]));
     }
 
     return (

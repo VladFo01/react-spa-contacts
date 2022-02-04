@@ -5,9 +5,10 @@ const ContactForm = ({ contacts, setContacts }) => {
 
     // function for general validation of the form
     function validateInputs(values, state = contacts) {
+
         for (let key in values) {
             // check whether there is an empty field
-            if (values[key] === '') {
+            if (values[key].trim() === '') {
                 throw new Error(`Your ${key} is empty!`);
             }
 
@@ -36,6 +37,7 @@ const ContactForm = ({ contacts, setContacts }) => {
     }
 
     function setParentState(currentObject) {
+
         setContacts(prevArr => {
             const newObject = {
                 ...currentObject,

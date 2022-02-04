@@ -32,7 +32,7 @@ const Table = ({ contacts, setContacts }) => {
                                 <Link className='table-link blue' to={`/details/${contact.id}`}>
                                     More details
                                 </Link>
-                                <Link className='table-link red' to={`/contacts/${contact.id}`}>
+                                <Link className='table-link red' to={`/contacts/${contact.id}/delete`}>
                                     Delete
                                 </Link>
                             </td>
@@ -43,7 +43,7 @@ const Table = ({ contacts, setContacts }) => {
 
             <Routes>
                 <Route 
-                    path={':id'} 
+                    path={':id/delete'} 
                     element={<ConfirmModal onClickAction={deleteContact} paramName={'id'} />} 
                 />
             </Routes>

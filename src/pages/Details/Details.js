@@ -1,32 +1,42 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DetailsForm from "../../Components/DetailsForm/DetailsForm";
 import Header from "../../Components/Header/Header";
 import Info from "../../Components/Info/Info";
 import './details.scss';
 
-const Details = ({contacts, setContacts}) => {
+const Details = ({ contacts, setContacts }) => {
     const  { id } = useParams();
     const navigate = useNavigate();
 
-    // find contact with such id
-    const contact = contacts.find(elem => elem.id === id);
+    // get default contact values
+    function getDefContactValues (state) {
+        // find contact with such id
+        const contact = state.find(elem => elem.id === id);
 
-    // get array of contact values which we already have
-    const defContactValues = Object.keys(contact).map(key => ({
-        key,
-        value: contact[key]
-    }));
+        // get array of contact values which we already have
+        const defContactValues = Object.keys(contact).map(key => ({
+            key,
+            value: contact[key]
+        }));
+
+        return defContactValues;
+    }
+
+    const defContactValues = getDefContactValues(contacts);
 
     const [contactValues, setContactValues] = useState(defContactValues);
-    const [successSave, setSuccessSave] = useState(false);
-
-    useEffect(() => {
-        setSuccessSave(false);
-    }, [contactValues]);
 
     // save changes
     function handleSaveChanges(state, id) {
+        setContactValues(prevArr => {
+            return prevArr.map(elem => {
+                if (elem?.edited) {
+                    delete elem.edited;
+                }
+                return elem;
+            });
+        });
         setContacts(prevArr => {
             return prevArr.map(elem => {
                 if (elem.id === id) {
@@ -41,10 +51,7 @@ const Details = ({contacts, setContacts}) => {
                 return elem;
             });
         });
-        setSuccessSave(true);
     }
-
-    console.log(contactValues);
 
     return (
         <>
@@ -57,7 +64,7 @@ const Details = ({contacts, setContacts}) => {
                     className="details-button save" 
                     onClick={() => handleSaveChanges(contactValues, id)}
                 >
-                    {successSave ? `Save changes ${String.fromCharCode(10004)}` : "Save changes"}
+                    Save changes
                 </button>
                 <button 
                     className="details-button cancel" 

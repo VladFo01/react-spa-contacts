@@ -30,7 +30,6 @@ const Form = ({ fields = [], setParentState, validate, legend, addBtnValue }) =>
         }
         setParentState(object);
         setError(null);
-        console.log('works');
         handleClear();
     }
 

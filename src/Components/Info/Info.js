@@ -48,7 +48,7 @@ const Info = ({ contactValues, setContactValues, defContactValues }) => {
                                 : null}
                                 {elem.key !== 'name' && elem.key !== 'surname' &&
                                 elem.key !== 'phone' && elem.key !== 'email' && elem.key !== 'birthday' ? 
-                                    <Link className='table-link red' to={`${location.pathname}/${elem.key}`}>
+                                    <Link className='table-link red' to={`${location.pathname}/${elem.key}/delete`}>
                                         Delete
                                     </Link>
                                 : null}
@@ -61,7 +61,7 @@ const Info = ({ contactValues, setContactValues, defContactValues }) => {
 
             <Routes>
                 <Route
-                    path={':id'}
+                    path={':key/delete'}
                     element={<ConfirmModal onClickAction={deleteValue} paramName={'key'} />}
                 />
                 <Route 

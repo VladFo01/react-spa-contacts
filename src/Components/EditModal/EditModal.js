@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import './EditModal.scss';
 
@@ -34,7 +34,7 @@ const EditModal = ({ contactValues, setContactValues }) => {
     }
     
     function onClickAction (state = value, currKey = key) {
-        if (state === '') return;
+        if (state.trim() === '') return;
 
         setContactValues(prevArr => {
             return prevArr.map(elem => {
